@@ -40,18 +40,7 @@ public class WaveSpawner : MonoBehaviour
 
         if(state == SpawnState.WAITING)
         {
-            if(!EnemyIsAlive())
-            {
-                // start new Round
-                WaveCompleted();
-               
-                return;
-
-            }
-            else
-            {
-                return;
-            }
+            WaveCompleted();
 
         }
         

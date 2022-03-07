@@ -108,8 +108,9 @@ GameObject:
   - component: {fileID: 8159290897808705873}
   - component: {fileID: 8159290897808705872}
   - component: {fileID: 8159290897808705887}
-  - component: {fileID: 8159290897808705875}
   - component: {fileID: 8159290897808705876}
+  - component: {fileID: 7532756130896223802}
+  - component: {fileID: 7268769454701124244}
   m_Layer: 0
   m_Name: EnemyLogic
   m_TagString: Enemy
@@ -216,22 +217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!58 &8159290897808705875
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159290897808705886}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0016234517, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.4009711
 --- !u!50 &8159290897808705876
 Rigidbody2D:
   serializedVersion: 4
@@ -253,3 +238,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7532756130896223802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159290897808705886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6b70f0068d28948948ec03b210e96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 20
+--- !u!70 &7268769454701124244
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159290897808705886}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014728546, y: -0.007364571}
+  m_Size: {x: 0.4705429, y: 0.8011569}
+  m_Direction: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 namespace Pathfinding {
+	
 	/// <summary>
 	/// Sets the destination of an AI to the position of a specified object.
 	/// This component should be attached to a GameObject together with a movement script such as AIPath, RichAI or AILerp.
@@ -31,9 +32,11 @@ namespace Pathfinding {
 			if (ai != null) ai.onSearchPath -= Update;
 		}
 
+		
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
-			if (target != null && ai != null) ai.destination = target.position;
+
+			if (target != null && ai != null) ai.destination = target.position; //"code for offsetting target pos to infront of player"  new Vector3(target.position.x + 1, target.position.y, target.position.z);
 		}
 	}
 }
