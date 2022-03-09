@@ -10,12 +10,14 @@ public class enemyHealth : MonoBehaviour
     private SpriteRenderer rend;
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
-
+    public Transform ETrans;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
+        ETrans = GetComponent<Transform>();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
