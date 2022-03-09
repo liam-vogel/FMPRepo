@@ -10,7 +10,7 @@ public class enemyHealth : MonoBehaviour
     private SpriteRenderer rend;
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
-    public Transform ETrans;
+    private Transform ETrans;
 
     // Start is called before the first frame update
     void Start()
