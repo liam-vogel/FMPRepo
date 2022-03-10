@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    //EXPScript Exps;
+    homingWeapon HWep;
+    public float Exp = 0f;
+    public float LevelUpAmount = 50f;
+    public Image ExpBar;
+    public Canvas LevelUpUi;
     public float health = 100;
     public float damage;
     private Rigidbody2D myRB;
@@ -26,11 +32,20 @@ public class PlayerScript : MonoBehaviour
     private enum FSM { Idle, walking };
 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("EXP"))
+        {
+            Exp++;
+            collision.gameObject.SetActive(false);
+        }
+    }
     private void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
+       // Exps = GetComponent<EXPScript>();
         
          StartCoroutine("Stopwatch");
         
@@ -47,10 +62,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         HealthBar.fillAmount = health / 100;
+        ExpBar.fillAmount = Exp / 100;
 
-      
 
-
+        if (Exp >= LevelUpAmount)
+        {
+            LevelUp();
+        }
 
 
     }
@@ -78,6 +96,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void LevelUp()
+    {
+        Time.timeScale = 0;
+        Exp = 0;
+        LevelUpAmount += 20;
+        health++;
+        speed += 0.1f;
+        HWep.speed++;
+        HWep.rotateSpeed++;
+        LevelUpUi.gameObject.SetActive(true);
+
+    }
   
 
    

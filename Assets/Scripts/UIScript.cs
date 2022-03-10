@@ -12,6 +12,9 @@ public class UIScript : MonoBehaviour
     public Image SettingsMenu;
     public GameObject unpauseButton;
     public GameObject pauseButton;
+    public GameObject UpgradesMenu;
+    public GameObject CharactersMenu;
+    public Canvas LevelUpUi;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,9 @@ public class UIScript : MonoBehaviour
         SettingsMenu.gameObject.SetActive(false);
         unpauseButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(true);
-        
+        UpgradesMenu.gameObject.SetActive(false);
+        CharactersMenu.gameObject.SetActive(false);
+
 
     }
    public void StartButton()
@@ -31,6 +36,9 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         MenuUi.gameObject.SetActive(true);
         PlayerUi.gameObject.SetActive(false);
+        CharactersMenu.gameObject.SetActive(false);
+        UpgradesMenu.gameObject.SetActive(false);
+
 
    }
 
@@ -48,7 +56,7 @@ public class UIScript : MonoBehaviour
        
     }
 
-    void PauseButton()
+    public void PauseButton()
     {
 
 
@@ -59,8 +67,30 @@ public class UIScript : MonoBehaviour
         Debug.Log("On");
     }
 
+    public void UpgradesButton()
+    {
+        UpgradesMenu.gameObject.SetActive(true);
+    }
+    public void OffCharectersButton()
+    {
+        CharactersMenu.gameObject.SetActive(false);
+    }
+    public void OffUpgradesButton()
+    {
+        UpgradesMenu.gameObject.SetActive(false);
+    }
 
+    public void CharectersButton()
+    {
+        CharactersMenu.gameObject.SetActive(true);
+    }
 
+    public void LevelUpButton()
+    {
+        LevelUpUi.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        
+    }
     // Update is called once per frame
     void Update()
     {

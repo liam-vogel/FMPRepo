@@ -11,12 +11,14 @@ public class enemyHealth : MonoBehaviour
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
     private Transform ETrans;
+    public GameObject EXPItem;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
         ETrans = GetComponent<Transform>();
+        
         
     }
 
@@ -34,6 +36,7 @@ public class enemyHealth : MonoBehaviour
         if (health <= 0)
         {
             enemy.SetActive(false);
+            Instantiate(EXPItem, ETrans.position, ETrans.rotation);
             Debug.Log("EnemyDied");
            
 
