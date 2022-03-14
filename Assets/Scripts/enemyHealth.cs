@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class enemyHealth : MonoBehaviour
 {
-    public float health;
-    public float damage;
+    public float health = 60;
+    public float damage = 20;
     public GameObject enemy;
     private SpriteRenderer rend;
     private Color damageColor = Color.red;

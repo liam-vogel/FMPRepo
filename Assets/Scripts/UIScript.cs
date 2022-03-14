@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
-    private Canvas MenuUi;
+    public Canvas MenuUi;
     public Canvas PlayerUi;
     public Canvas SettingsUi;
     public Image SettingsMenu;
@@ -18,11 +18,11 @@ public class UIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MenuUi = GetComponent<Canvas>();
-        PlayerUi = GetComponent<Canvas>();
-        Time.timeScale = 0;
-        MenuUi.gameObject.SetActive(false);
-        PlayerUi.gameObject.SetActive(true);
+        //MenuUi = GetComponent<Canvas>();
+       // PlayerUi = GetComponent<Canvas>();
+        Time.timeScale = 1;
+        MenuUi.gameObject.SetActive(true);
+        PlayerUi.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
         unpauseButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(true);
@@ -34,8 +34,8 @@ public class UIScript : MonoBehaviour
    public void StartButton()
    {
         Time.timeScale = 1;
-        MenuUi.gameObject.SetActive(true);
-        PlayerUi.gameObject.SetActive(false);
+        MenuUi.gameObject.SetActive(false);
+        PlayerUi.gameObject.SetActive(true);
         CharactersMenu.gameObject.SetActive(false);
         UpgradesMenu.gameObject.SetActive(false);
 

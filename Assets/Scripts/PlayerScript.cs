@@ -6,14 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    //Stats
+    public float health = 100;
+    public float damage = 2f;
+    public float speed = 1f;
+    public float attackRate;
+    public float attackLength;
+
+
+
     //EXPScript Exps;
     homingWeapon HWep;
     public float Exp = 0f;
     public float LevelUpAmount = 50f;
     public Image ExpBar;
     public Canvas LevelUpUi;
-    public float health = 100;
-    public float damage;
+   
     private Rigidbody2D myRB;
     private Animator myAnim;
     public Image HealthBar;
@@ -27,8 +35,6 @@ public class PlayerScript : MonoBehaviour
     private Color normalColor = Color.white;
     
 
-    [SerializeField]
-    private float speed = 1f;
     private enum FSM { Idle, walking };
 
 
@@ -101,8 +107,8 @@ public class PlayerScript : MonoBehaviour
         Time.timeScale = 0;
         Exp = 0;
         LevelUpAmount += 20;
-        health++;
-        speed += 0.1f;
+        health += 30;
+        speed += 0.01f;
         HWep.speed++;
         HWep.rotateSpeed++;
         LevelUpUi.gameObject.SetActive(true);
