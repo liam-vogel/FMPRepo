@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     //Stats
+    public float armor = 2;
     public float health = 100;
     public float damage = 2f;
     public float speed = 1f;

@@ -40,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
 
         if(state == SpawnState.WAITING)
         {
+            //EnemyIsAlive();
             WaveCompleted();
 
         }

@@ -14,18 +14,19 @@ public class UIScript : MonoBehaviour
     public GameObject pauseButton;
     public GameObject UpgradesMenu;
     public GameObject CharactersMenu;
+    public GameObject Scroll;
     public Canvas LevelUpUi;
     // Start is called before the first frame update
     void Start()
     {
         //MenuUi = GetComponent<Canvas>();
        // PlayerUi = GetComponent<Canvas>();
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         MenuUi.gameObject.SetActive(true);
         PlayerUi.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
         unpauseButton.gameObject.SetActive(false);
-        pauseButton.gameObject.SetActive(true);
+        pauseButton.gameObject.SetActive(false);
         UpgradesMenu.gameObject.SetActive(false);
         CharactersMenu.gameObject.SetActive(false);
 
@@ -38,6 +39,7 @@ public class UIScript : MonoBehaviour
         PlayerUi.gameObject.SetActive(true);
         CharactersMenu.gameObject.SetActive(false);
         UpgradesMenu.gameObject.SetActive(false);
+        pauseButton.gameObject.SetActive(true);
 
 
    }
@@ -45,10 +47,11 @@ public class UIScript : MonoBehaviour
     public void unPauseButton()
     {
         Time.timeScale = 1; 
-        PlayerUi.gameObject.SetActive(false);
+        PlayerUi.gameObject.SetActive(true);
         pauseButton.gameObject.SetActive(true);
         unpauseButton.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
+        SettingsUi.gameObject.SetActive(false);
         Debug.Log("notActive");
         
        
@@ -63,26 +66,36 @@ public class UIScript : MonoBehaviour
         unpauseButton.gameObject.SetActive(true);
         pauseButton.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(true);
+        SettingsUi.gameObject.SetActive(true);
         Time.timeScale = 0;
         Debug.Log("On");
     }
 
     public void UpgradesButton()
     {
+
         UpgradesMenu.gameObject.SetActive(true);
+        CharactersMenu.gameObject.SetActive(false);
+        Scroll.gameObject.SetActive(false);
+
+
     }
     public void OffCharectersButton()
     {
         CharactersMenu.gameObject.SetActive(false);
+        Scroll.gameObject.SetActive(true);
     }
     public void OffUpgradesButton()
     {
         UpgradesMenu.gameObject.SetActive(false);
+        Scroll.gameObject.SetActive(true);
     }
 
     public void CharectersButton()
     {
         CharactersMenu.gameObject.SetActive(true);
+        UpgradesMenu.gameObject.SetActive(false);
+        Scroll.gameObject.SetActive(false);
     }
 
     public void LevelUpButton()
@@ -98,5 +111,15 @@ public class UIScript : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+
+
+    public void QuitButton()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void ScriptSettings()
+    {
+       
     }
 }
