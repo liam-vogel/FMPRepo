@@ -61,6 +61,8 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
+       
+
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * 3f * speed;
 
         if (health <= 0)
@@ -103,9 +105,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+
+
     public void LevelUp()
     {
-        Time.timeScale = 0;
+        
         Exp = 0;
         LevelUpAmount += 20;
         health += 30;
@@ -113,6 +117,7 @@ public class PlayerScript : MonoBehaviour
         HWep.speed++;
         HWep.rotateSpeed++;
         LevelUpUi.gameObject.SetActive(true);
+        Time.timeScale = 0;
 
     }
   

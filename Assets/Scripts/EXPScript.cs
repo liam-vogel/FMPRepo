@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EXPScript : MonoBehaviour
 {
    
-    //PlayerScript PScript;
+    PlayerScript PScript;
     public float Exp = 0;
     public Image ExpBar;
     public GameObject ExpItem;
@@ -35,8 +35,11 @@ public class EXPScript : MonoBehaviour
     void Update()
     {
          
-         ExpBar.fillAmount = Exp / 100;
+         ExpBar.fillAmount = Exp / PScript.LevelUpAmount * 100;
          
 
     }
+
+
+
 }

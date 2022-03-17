@@ -10,6 +10,8 @@ public class homingWeapon : MonoBehaviour
     public Transform target;
     public int speed;
     public float rotateSpeed;
+    public Vector2Int mousePos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,11 @@ public class homingWeapon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - .5f);
+        mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - .5f);
+
         Vector2 direction = (Vector2)target.position - rb.position;
+        //Vector2 direction = (Vector2)mousePos - rb.position;
         direction.Normalize();
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
         rb.angularVelocity = -rotateAmount * rotateSpeed;

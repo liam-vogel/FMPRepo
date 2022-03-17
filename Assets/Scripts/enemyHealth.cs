@@ -48,7 +48,7 @@ public class enemyHealth : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        rend.material.color = normalColor;
+       // rend.material.color = normalColor;
 
     }
 }

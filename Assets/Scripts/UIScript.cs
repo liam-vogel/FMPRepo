@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
+    public PlayerScript PScript;
     public Canvas MenuUi;
     public Canvas PlayerUi;
     public Canvas SettingsUi;
@@ -15,8 +16,16 @@ public class UIScript : MonoBehaviour
     public GameObject UpgradesMenu;
     public GameObject CharactersMenu;
     public GameObject Scroll;
+    public GameObject Player;
+    public Sprite Char1;
+    public Sprite Char2;
     public Canvas LevelUpUi;
+    public GameObject Hwep;
+    public GameObject Cwep;
     // Start is called before the first frame update
+
+  
+
     void Start()
     {
         //MenuUi = GetComponent<Canvas>();
@@ -29,6 +38,7 @@ public class UIScript : MonoBehaviour
         pauseButton.gameObject.SetActive(false);
         UpgradesMenu.gameObject.SetActive(false);
         CharactersMenu.gameObject.SetActive(false);
+        Player.GetComponent<homingWeapon>();
 
 
     }
@@ -111,6 +121,9 @@ public class UIScript : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+       
+    
     }
 
 
@@ -118,8 +131,30 @@ public class UIScript : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void ScriptSettings()
+    public void CharecterSelect1()
     {
-       
+        PScript.rend.sprite = Char1;
     }
+
+    public void CharecterSelect2()
+    {
+        PScript.rend.sprite = Char2;
+    }
+
+    public void StaffUpgrade()
+    {
+        //fix this bit xoxo
+        //fixed your code liam xoxo
+        Hwep.SetActive(false);
+        Cwep.SetActive(true);
+    }
+
+    public void OffStaffUpgrade()
+    {
+        //fix this bit xoxo
+        //fixed your code liam xoxo
+        Hwep.SetActive(true);
+        Cwep.SetActive(false);
+    }
+
 }
