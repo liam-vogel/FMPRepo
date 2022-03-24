@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     public float speed = 1f;
     public float attackRate;
     public float attackLength;
+    
 
 
 
@@ -34,6 +35,7 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer rend;
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
+
     
 
     private enum FSM { Idle, walking };
@@ -52,16 +54,18 @@ public class PlayerScript : MonoBehaviour
         myRB = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
-       // Exps = GetComponent<EXPScript>();
-        
-         StartCoroutine("Stopwatch");
+        // Exps = GetComponent<EXPScript>();
+        damage -= armor;
+        StartCoroutine("Stopwatch");
         
         
     }
 
+    
+
     private void Update()
     {
-       
+        
 
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * 3f * speed;
 
@@ -109,15 +113,16 @@ public class PlayerScript : MonoBehaviour
 
     public void LevelUp()
     {
-        
-        Exp = 0;
-        LevelUpAmount += 20;
-        health += 30;
-        speed += 0.01f;
-        HWep.speed++;
-        HWep.rotateSpeed++;
         LevelUpUi.gameObject.SetActive(true);
         Time.timeScale = 0;
+        Exp = 0;
+        LevelUpAmount += 20;
+        //health += 30;
+        //speed += 0.05f;
+        //armor++;
+       // HWep.speed++;
+       // HWep.rotateSpeed++;
+      
 
     }
   
