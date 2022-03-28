@@ -35,12 +35,21 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer rend;
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
+    public GameObject lootui;
 
     
 
     private enum FSM { Idle, walking };
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("chest"))
+        {
+            lootui.SetActive(true);
+        }
+    }
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("EXP"))
