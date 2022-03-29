@@ -24,7 +24,7 @@ public class EXPScript : MonoBehaviour
         {
           
             Exp++;
-            ExpItem.SetActive(false);
+            Destroy(this);
 
         }
     }

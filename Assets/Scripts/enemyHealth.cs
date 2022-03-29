@@ -35,7 +35,7 @@ public class enemyHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            enemy.SetActive(false);
+            Destroy(this);
             Instantiate(EXPItem, ETrans.position, ETrans.rotation);
             Debug.Log("EnemyDied");
            

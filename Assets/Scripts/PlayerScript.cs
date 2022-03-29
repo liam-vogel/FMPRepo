@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
     //Stats
     public float armor = 2;
     public float health = 100;
-    public float damage = 2f;
+    public float damage = 3f;
     public float speed = 1f;
     public float attackRate;
     public float attackLength;
@@ -23,7 +23,9 @@ public class PlayerScript : MonoBehaviour
     public float LevelUpAmount = 50f;
     public Image ExpBar;
     public Canvas LevelUpUi;
-   
+
+    //references
+    public BoxCollider2D coll;
     private Rigidbody2D myRB;
     private Animator myAnim;
     public Image HealthBar;
@@ -36,37 +38,33 @@ public class PlayerScript : MonoBehaviour
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
     public GameObject lootui;
+   
 
     
 
     private enum FSM { Idle, walking };
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("chest"))
-        {
-            lootui.SetActive(true);
-        }
-    }
 
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D coll)
     {
-        if(collision.CompareTag("EXP"))
+        if(coll.CompareTag("EXP"))
         {
             Exp++;
-            collision.gameObject.SetActive(false);
+            coll.gameObject.SetActive(false);
         }
+
+        
     }
     private void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
+        coll = GetComponent<BoxCollider2D>();
         // Exps = GetComponent<EXPScript>();
         damage -= armor;
         StartCoroutine("Stopwatch");
-        
         
     }
 

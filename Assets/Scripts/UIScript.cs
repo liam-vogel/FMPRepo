@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
+   [Header("ui objects")] 
     public PlayerScript PScript;
     public Canvas MenuUi;
     public Canvas PlayerUi;
@@ -20,10 +21,12 @@ public class UIScript : MonoBehaviour
     public Sprite Char1;
     public Sprite Char2;
     public Canvas LevelUpUi;
-    public GameObject Hwep;
-    public GameObject Cwep;
+  
     public GameObject Hbut;
     public GameObject Cbut;
+    public GameObject lootui;
+
+    //weapon stats
     public Text HStat;
     public Text SStat;
     public Text AStat;
@@ -32,13 +35,25 @@ public class UIScript : MonoBehaviour
     public Text MSStat;
     public Text MAStat;
     public Text MDStat;
+    
+
+    //stats
     private float health;
     private float speed;
     private float damage;
     private float armor;
     public int gold = 100;
-    // Start is called before the first frame update
+    public Text goldAm;
+    public Text goldAmUp;
 
+    //Referances
+    public Collider2D coll;
+    public GameObject chest;
+
+    //attacks
+    public GameObject Hwep;
+    public GameObject Cwep;
+    public GameObject attack;
 
 
     void Start()
@@ -48,6 +63,7 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 0;
         MenuUi.gameObject.SetActive(true);
         PlayerUi.gameObject.SetActive(false);
+        lootui.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
         unpauseButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
@@ -55,6 +71,9 @@ public class UIScript : MonoBehaviour
         CharactersMenu.gameObject.SetActive(false);
         Player.GetComponent<homingWeapon>();
         Hbut.SetActive(false);
+        coll = PScript.GetComponent<BoxCollider2D>();
+       // chest = 
+       
        // PScript.health = health;
        // PScript.speed = speed;
        // PScript.speed = damage;
@@ -62,7 +81,20 @@ public class UIScript : MonoBehaviour
 
 
     }
-   public void StartButton()
+
+    
+
+    public void WeaponLootButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+      //  Hwep.SetActive(false);
+       // Cwep.SetActive(false);
+        attack.SetActive(true);
+        Destroy(chest);
+        
+    }
+    public void StartButton()
    {
         Time.timeScale = 1;
         MenuUi.gameObject.SetActive(false);
@@ -74,57 +106,105 @@ public class UIScript : MonoBehaviour
 
    }
 
-    public void ArmorUpgrade()
+    public void SMArmorUpgrade()
     {
         if(gold >= 20)
         {
             gold -= 20;
             PScript.armor++;
             LevelUpUi.gameObject.SetActive(false);
-            if (!UpgradesMenu)
-                StartCoroutine(PlayGame());
+          
         }
         
         
 
     }
-    public void SpeedUpgrade()
+    public void SMSpeedUpgrade()
     {
         if (gold >= 20)
         {
             gold -= 20;
             PScript.speed += 0.05f;
             LevelUpUi.gameObject.SetActive(false);
-            if (!UpgradesMenu)
-                StartCoroutine(PlayGame());
+            
         }
     }
 
-    public void HealthUpgrade()
+    public void SMHealthUpgrade()
     {
         if (gold >= 20)
         {
             gold -= 20;
             PScript.health += 30;
             LevelUpUi.gameObject.SetActive(false);
-            if (!UpgradesMenu)
-                StartCoroutine(PlayGame());
+            
 
 
         }
     }
-    public void DamageUpgrade()
+    public void SMDamageUpgrade()
     {
         if (gold >= 20)
         {
             gold -= 20;
             PScript.damage += 2;
             LevelUpUi.gameObject.SetActive(false);
-            if (!UpgradesMenu)
-                StartCoroutine(PlayGame());
+            
         }
     }
+
+
+    public void ArmorUpgrade()
+    {
         
+
+
+        PScript.armor++;
+            LevelUpUi.gameObject.SetActive(false);
+          
+        StartCoroutine(PlayGame());
+        
+
+
+
+    }
+    public void SpeedUpgrade()
+    {
+        
+        StartCoroutine(PlayGame());
+
+
+        PScript.speed += 0.05f;
+            LevelUpUi.gameObject.SetActive(false);
+           
+        
+    }
+
+    public void HealthUpgrade()
+    {
+        
+        StartCoroutine(PlayGame());
+
+        PScript.health += 30;
+            LevelUpUi.gameObject.SetActive(false);
+            
+
+
+        
+    }
+    public void DamageUpgrade()
+    {
+
+        
+        StartCoroutine(PlayGame());
+
+        PScript.damage += 2;
+            LevelUpUi.gameObject.SetActive(false);
+            
+        
+    }
+
+
 
     public void unPauseButton()
     {
@@ -203,6 +283,8 @@ public class UIScript : MonoBehaviour
         MDStat.text = PScript.damage.ToString();
         MSStat.text = PScript.speed.ToString();
         MAStat.text = PScript.armor.ToString();
+        goldAm.text = "Gold:" + gold.ToString();
+        goldAmUp.text = "Gold:" + gold.ToString();
 
 
     }
@@ -255,6 +337,45 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 0.75f;
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1;
+        Debug.Log("STAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAART" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "" +
+            "Gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaame");
         
     }
 }
