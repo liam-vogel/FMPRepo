@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    
     //Stats
     public float armor = 2;
     public float health = 100;
@@ -13,7 +14,8 @@ public class PlayerScript : MonoBehaviour
     public float speed = 1f;
     public float attackRate;
     public float attackLength;
-    
+
+
 
 
 
@@ -38,14 +40,32 @@ public class PlayerScript : MonoBehaviour
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
     public GameObject lootui;
-   
 
-    
+    public bool axeActive = false;
 
+
+    //  public Transform LaunchOffset;
+
+    //public axe LaunchOffset;
+
+    public GameObject AxePrefab;
+    public GameObject axeHolder;
+
+
+
+IEnumerator AxeAttack()
+{
+    //Instantiate(AxePrefab, LaunchOffset.transform, axeHolder.transform.rotation);
+    yield return new WaitForSeconds(3);
+}
     private enum FSM { Idle, walking };
 
 
-    
+    public void TakeDamage()
+    {
+        health -= damage;
+    }
+
     private void OnTriggerEnter2D(Collider2D coll)
     {
         if(coll.CompareTag("EXP"))
@@ -72,7 +92,14 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.Q));
+       // Instantiate(AxePrefab, axeHolder, axeHolder.transform.rotation);
+
+        /*  while (axeActive)
+          {
+              AxeAttack();
+          }*/
+
 
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * 3f * speed;
 
@@ -90,13 +117,17 @@ public class PlayerScript : MonoBehaviour
             LevelUp();
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            
+        }
 
     }
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.collider.CompareTag("Enemy"))
         {
-            health -= damage;
+            TakeDamage();
             rend.material.color = damageColor;
 
         }
@@ -115,6 +146,8 @@ public class PlayerScript : MonoBehaviour
 
         }
     }
+
+
 
 
 

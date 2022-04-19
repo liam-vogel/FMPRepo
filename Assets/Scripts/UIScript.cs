@@ -26,6 +26,9 @@ public class UIScript : MonoBehaviour
     public GameObject Cbut;
     public GameObject lootui;
 
+    public bool shield = false;
+    public float ShieldDur = 5;
+
     //weapon stats
     public Text HStat;
     public Text SStat;
@@ -49,6 +52,7 @@ public class UIScript : MonoBehaviour
     //Referances
     public Collider2D coll;
     public GameObject chest;
+    
 
     //attacks
     public GameObject Hwep;
@@ -82,8 +86,42 @@ public class UIScript : MonoBehaviour
 
     }
 
-    
+    IEnumerator Shield()
+    {
+        
+        
+         shield = true;
+            yield return new WaitForSeconds(5f);
+         shield = false;
+        
+    }
 
+    public void ShieldlootButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+        StartCoroutine("Shield");
+        Destroy(chest);
+
+    }
+
+    public void EXPLootButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+        PScript.Exp += 100;
+        Destroy(chest);
+
+    }
+
+    public void HealthLootButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+        PScript.health += 100;
+        Destroy(chest);
+
+    }
     public void WeaponLootButton()
     {
         Time.timeScale = 1;
@@ -93,6 +131,23 @@ public class UIScript : MonoBehaviour
         attack.SetActive(true);
         Destroy(chest);
         
+    }
+
+
+    public void AxeWeaponButton()
+    {
+        
+        if (gold >= 100)
+        {
+           
+            
+            gold -= 100;
+            PScript.axeActive = true;
+            
+
+
+
+        }
     }
     public void StartButton()
    {
@@ -132,9 +187,9 @@ public class UIScript : MonoBehaviour
 
     public void SMHealthUpgrade()
     {
-        if (gold >= 20)
+        if (gold >= 15)
         {
-            gold -= 20;
+            gold -= 15;
             PScript.health += 30;
             LevelUpUi.gameObject.SetActive(false);
             
@@ -144,9 +199,9 @@ public class UIScript : MonoBehaviour
     }
     public void SMDamageUpgrade()
     {
-        if (gold >= 20)
+        if (gold >= 30)
         {
-            gold -= 20;
+            gold -= 30;
             PScript.damage += 2;
             LevelUpUi.gameObject.SetActive(false);
             
@@ -279,10 +334,10 @@ public class UIScript : MonoBehaviour
         DStat.text = PScript.damage.ToString();
         SStat.text = PScript.speed.ToString();
         AStat.text = PScript.armor.ToString();
-        MHStat.text = PScript.health.ToString();
-        MDStat.text = PScript.damage.ToString();
-        MSStat.text = PScript.speed.ToString();
-        MAStat.text = PScript.armor.ToString();
+      //  MHStat.text = PScript.health.ToString();
+      //  MDStat.text = PScript.damage.ToString();
+      //  MSStat.text = PScript.speed.ToString();
+      //  MAStat.text = PScript.armor.ToString();
         goldAm.text = "Gold:" + gold.ToString();
         goldAmUp.text = "Gold:" + gold.ToString();
 
@@ -327,49 +382,18 @@ public class UIScript : MonoBehaviour
         
         Hwep.SetActive(true);
         Cbut.SetActive(true);
-        Hbut.SetActive(false);
-        Cwep.SetActive(false);
+       // Hbut.SetActive(false);
+        //Cwep.SetActive(false);
     }
 
+ 
 
-   public IEnumerator PlayGame()
+    public IEnumerator PlayGame()
     {
         Time.timeScale = 0.75f;
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1;
         Debug.Log("STAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAART" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
-            "" +
             "" +
             "" +
             "" +

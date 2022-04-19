@@ -16,18 +16,24 @@ public class enemyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
+       // rend = GetComponent<SpriteRenderer>();
         ETrans = GetComponent<Transform>();
-        
-        
+
+
     }
+
+   public void TakeDamage()
+    {
+        health -= damage;
+    }
+                     
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.CompareTag("attacks"))
         {
-            health -= damage;
-            rend.material.color = damageColor;
+            TakeDamage();
+          //  rend.material.color = damageColor;
         }
     }
     // Update is called once per frame
@@ -35,7 +41,7 @@ public class enemyHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
             Instantiate(EXPItem, ETrans.position, ETrans.rotation);
             Debug.Log("EnemyDied");
            
