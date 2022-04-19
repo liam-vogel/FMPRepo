@@ -74,7 +74,9 @@ public class UIScript : MonoBehaviour
         UpgradesMenu.gameObject.SetActive(false);
         CharactersMenu.gameObject.SetActive(false);
         Player.GetComponent<homingWeapon>();
-        Hbut.SetActive(false);
+       
+        Hbut.SetActive(true);
+        Cbut.SetActive(false);
         coll = PScript.GetComponent<BoxCollider2D>();
        // chest = 
        
@@ -370,20 +372,24 @@ public class UIScript : MonoBehaviour
     public void StaffUpgrade()
     {
         
-        Hwep.SetActive(false);
+      //  Hwep.SetActive(false);
         Cbut.SetActive(false);
-        Hbut.SetActive(true);
+       // Hbut.SetActive(true);
         Cwep.SetActive(true);
     }
 
     public void OffStaffUpgrade()
     {
-      
-        
-        Hwep.SetActive(true);
-        Cbut.SetActive(true);
-       // Hbut.SetActive(false);
-        //Cwep.SetActive(false);
+      if(gold >= 100)
+        {
+            gold -= 100;
+            Hwep.SetActive(true);
+            // Cbut.SetActive(true);
+            Hbut.SetActive(false);
+            //Cwep.SetActive(false);
+        }
+
+
     }
 
  

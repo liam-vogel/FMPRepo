@@ -31,6 +31,6 @@ public class controlledWeapon : MonoBehaviour
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.up * speed;
-        //rb.velocity = direction * speed;
+      //  rb.velocity = direction * speed;
     }
 }

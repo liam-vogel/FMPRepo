@@ -40,7 +40,8 @@ public class PlayerScript : MonoBehaviour
     private Color damageColor = Color.red;
     private Color normalColor = Color.white;
     public GameObject lootui;
-
+    public AudioSource ambientS;
+   // public AudioClip ambientSound;
     public bool axeActive = false;
 
 
@@ -85,6 +86,10 @@ IEnumerator AxeAttack()
         // Exps = GetComponent<EXPScript>();
         damage -= armor;
         StartCoroutine("Stopwatch");
+        ambientS = GetComponent<AudioSource>();
+
+
+        
         
     }
 
