@@ -8,6 +8,7 @@ TagManager:
   - attacks
   - EXP
   - chest
+  - lootui
   layers:
   - Default
   - TransparentFX

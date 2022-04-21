@@ -4,25 +4,43 @@ using UnityEngine;
 
 public class ChestScript : MonoBehaviour
 {
-    public GameObject lootui;
+    GameObject lootUI;
+  // public PlayerScript PS;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.CompareTag("Player"))
+        lootUI = GameObject.Find("lootUI");
+        lootUI.SetActive(false);
+    }
+
+    private void Update()
+    {
+
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Time.timeScale = 0;
-            lootui.SetActive(true);
+            lootUI.SetActive(true);
+            Time.timeScale = 0f;
+            gameObject.SetActive(false);
+
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

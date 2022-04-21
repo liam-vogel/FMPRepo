@@ -12,13 +12,13 @@ public class enemyHealth : MonoBehaviour
     private Color normalColor = Color.white;
     private Transform ETrans;
     public GameObject EXPItem;
-
+    
     // Start is called before the first frame update
     void Start()
     {
        // rend = GetComponent<SpriteRenderer>();
         ETrans = GetComponent<Transform>();
-
+       
 
     }
 
@@ -43,11 +43,13 @@ public class enemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
             Instantiate(EXPItem, ETrans.position, ETrans.rotation);
+
             Debug.Log("EnemyDied");
            
 
         }
-        
+
+        ETrans = GetComponent<Transform>();
 
     
     }

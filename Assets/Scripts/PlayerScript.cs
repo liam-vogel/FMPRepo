@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
     public float LevelUpAmount = 50f;
     public Image ExpBar;
     public Canvas LevelUpUi;
+    // GameObject lootUI;
 
     //references
     public BoxCollider2D coll;
@@ -43,7 +44,7 @@ public class PlayerScript : MonoBehaviour
     public AudioSource ambientS;
    // public AudioClip ambientSound;
     public bool axeActive = false;
-
+   // public GameObject lootUI;
 
     //  public Transform LaunchOffset;
 
@@ -52,7 +53,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject AxePrefab;
     public GameObject axeHolder;
 
-
+   
 
 IEnumerator AxeAttack()
 {
@@ -87,10 +88,12 @@ IEnumerator AxeAttack()
         damage -= armor;
         StartCoroutine("Stopwatch");
         ambientS = GetComponent<AudioSource>();
+        //lootUI = GameObject.Find("lootUI");
+        //lootUI.SetActive(false);
 
 
-        
-        
+
+
     }
 
     

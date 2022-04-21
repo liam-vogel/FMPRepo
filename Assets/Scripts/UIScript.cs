@@ -25,6 +25,7 @@ public class UIScript : MonoBehaviour
     public GameObject Hbut;
     public GameObject Cbut;
     public GameObject lootui;
+    public AudioSource ambient;
 
     public bool shield = false;
     public float ShieldDur = 5;
@@ -59,6 +60,7 @@ public class UIScript : MonoBehaviour
     public GameObject Cwep;
     public GameObject attack;
 
+    public Scrollbar scrollbar;
 
     void Start()
     {
@@ -67,18 +69,20 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 0;
         MenuUi.gameObject.SetActive(true);
         PlayerUi.gameObject.SetActive(false);
-        lootui.gameObject.SetActive(false);
+       // lootui.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
         unpauseButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         UpgradesMenu.gameObject.SetActive(false);
         CharactersMenu.gameObject.SetActive(false);
         Player.GetComponent<homingWeapon>();
-       
+        ambient = GetComponent<AudioSource>();
         Hbut.SetActive(true);
         Cbut.SetActive(false);
         coll = PScript.GetComponent<BoxCollider2D>();
-       // chest = 
+        // chest = 
+        scrollbar.value = 0.5f;
+     
        
        // PScript.health = health;
        // PScript.speed = speed;
@@ -88,6 +92,10 @@ public class UIScript : MonoBehaviour
 
     }
 
+    public void Volume()
+    {
+        ambient.volume = scrollbar.value;
+    }
     IEnumerator Shield()
     {
         
@@ -103,7 +111,7 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         lootui.SetActive(false);
         StartCoroutine("Shield");
-        Destroy(chest);
+       // Destroy(chest);
 
     }
 
@@ -112,7 +120,7 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         lootui.SetActive(false);
         PScript.Exp += 100;
-        Destroy(chest);
+      //  Destroy(chest);
 
     }
 
@@ -121,7 +129,7 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         lootui.SetActive(false);
         PScript.health += 100;
-        Destroy(chest);
+       // Destroy(chest);
 
     }
     public void WeaponLootButton()
@@ -131,7 +139,7 @@ public class UIScript : MonoBehaviour
       //  Hwep.SetActive(false);
        // Cwep.SetActive(false);
         attack.SetActive(true);
-        Destroy(chest);
+       // Destroy(chest);
         
     }
 
