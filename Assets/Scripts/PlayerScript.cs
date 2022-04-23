@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     public float attackLength;
 
 
-
+    
 
 
     //EXPScript Exps;
@@ -25,12 +25,12 @@ public class PlayerScript : MonoBehaviour
     public float LevelUpAmount = 50f;
     public Image ExpBar;
     public Canvas LevelUpUi;
-    // GameObject lootUI;
+    public GameObject lootUI;
 
     //references
     public BoxCollider2D coll;
     private Rigidbody2D myRB;
-    private Animator myAnim;
+    private Animator anim;
     public Image HealthBar;
     public Text timer;
     private float time;
@@ -44,15 +44,22 @@ public class PlayerScript : MonoBehaviour
     public AudioSource ambientS;
    // public AudioClip ambientSound;
     public bool axeActive = false;
-   // public GameObject lootUI;
-
+    // public GameObject lootUI;
+    public Sprite left;
+    public Sprite right;
+    public Sprite idle;
     //  public Transform LaunchOffset;
 
     //public axe LaunchOffset;
 
+    public MovementState state;
+    public enum MovementState { idle, left, right,up }
+
     public GameObject AxePrefab;
     public GameObject axeHolder;
 
+    public float dirX;
+    public float dirY;
    
 
 IEnumerator AxeAttack()
@@ -81,16 +88,16 @@ IEnumerator AxeAttack()
     private void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
-        myAnim = GetComponent<Animator>();
-        rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+       // rend = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         // Exps = GetComponent<EXPScript>();
         damage -= armor;
         StartCoroutine("Stopwatch");
         ambientS = GetComponent<AudioSource>();
-        //lootUI = GameObject.Find("lootUI");
-        //lootUI.SetActive(false);
-
+        lootUI = GameObject.Find("lootUI");
+        lootUI.SetActive(false);
+        
 
 
 
@@ -100,14 +107,19 @@ IEnumerator AxeAttack()
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Q));
-       // Instantiate(AxePrefab, axeHolder, axeHolder.transform.rotation);
+        //      if (Input.GetKeyDown(KeyCode.Q));
+        //     Instantiate(AxePrefab, axeHolder, axeHolder.transform.rotation);
 
         /*  while (axeActive)
           {
               AxeAttack();
           }*/
 
+        dirX = Input.GetAxisRaw("Horizontal");
+        dirY = Input.GetAxisRaw("Vertical");
+
+
+        Animate();
 
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * 3f * speed;
 
@@ -148,11 +160,30 @@ IEnumerator AxeAttack()
 
     private void Animate()
     {
+        anim.SetInteger("state", (int)state);
 
-        if (Mathf.Abs(myRB.velocity.x) > 0.1f)
+        if (dirX > 0f)
         {
+            state = MovementState.right;
+
+            // rend.sprite = right;
+            Debug.Log("right");
 
         }
+        else if (dirX < 0f)
+        {
+            state = MovementState.left;
+            Debug.Log("left");
+            //  rend.sprite = left;
+        }
+        else if (dirY > 0f)
+        {
+            state = MovementState.idle;
+            //  rend.sprite = idle;  
+        }
+        else
+            state = MovementState.up;
+    
     }
 
 

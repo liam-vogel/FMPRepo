@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ChestScript : MonoBehaviour
 {
-    GameObject lootUI;
-  // public PlayerScript PS;
+  //  GameObject lootUI;
+   public PlayerScript PS;
+    public GameObject player;
 
     private void Start()
     {
-        lootUI = GameObject.Find("lootUI");
-        lootUI.SetActive(false);
+       // lootUI = GameObject.Find("lootUI");
+        player = GameObject.Find("Player");
+        PS = player.GetComponent<PlayerScript>();
+        //lootUI.SetActive(false);
     }
 
     private void Update()
@@ -21,7 +24,7 @@ public class ChestScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            lootUI.SetActive(true);
+            PS.lootUI.SetActive(true);
             Time.timeScale = 0f;
             gameObject.SetActive(false);
 
