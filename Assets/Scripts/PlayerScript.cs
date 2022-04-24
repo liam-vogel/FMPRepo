@@ -45,15 +45,16 @@ public class PlayerScript : MonoBehaviour
    // public AudioClip ambientSound;
     public bool axeActive = false;
     // public GameObject lootUI;
-    public Sprite left;
-    public Sprite right;
-    public Sprite idle;
+  //  public Sprite left;
+ //   public Sprite right;
+  //  public Sprite idle;
     //  public Transform LaunchOffset;
+    public ParticleSystem bloodEffect;
 
     //public axe LaunchOffset;
 
     public MovementState state;
-    public enum MovementState { idle, left, right,up }
+    public enum MovementState { idle, left, right,up,down }
 
     public GameObject AxePrefab;
     public GameObject axeHolder;
@@ -73,6 +74,7 @@ IEnumerator AxeAttack()
     public void TakeDamage()
     {
         health -= damage;
+        bloodEffect.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
@@ -158,7 +160,7 @@ IEnumerator AxeAttack()
 
     }
 
-    private void Animate()
+    public void Animate()
     {
         anim.SetInteger("state", (int)state);
 
@@ -167,22 +169,30 @@ IEnumerator AxeAttack()
             state = MovementState.right;
 
             // rend.sprite = right;
-            Debug.Log("right");
+            //   Debug.Log("right");
 
         }
         else if (dirX < 0f)
         {
             state = MovementState.left;
-            Debug.Log("left");
+            //   Debug.Log("left");
             //  rend.sprite = left;
         }
         else if (dirY > 0f)
         {
-            state = MovementState.idle;
+            state = MovementState.down;
             //  rend.sprite = idle;  
         }
-        else
+        else if (dirY < 0f)
+        {
             state = MovementState.up;
+
+        }
+        else
+        {
+            state = MovementState.idle;
+        }
+          
     
     }
 
