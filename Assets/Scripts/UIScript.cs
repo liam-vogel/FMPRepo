@@ -21,6 +21,7 @@ public class UIScript : MonoBehaviour
     public Sprite Char1;
     public Sprite Char2;
     public Canvas LevelUpUi;
+    public GameObject ShieldUI;
   
     public GameObject Hbut;
     public GameObject Cbut;
@@ -91,25 +92,29 @@ public class UIScript : MonoBehaviour
 
 
     }
-
+   
     public void Volume()
     {
         ambient.volume = scrollbar.value;
     }
-    IEnumerator Shield()
+    public IEnumerator Shield()
     {
         
- 
+   
          shield = true;
+        
             yield return new WaitForSeconds(5f);
          shield = false;
-        
+        ShieldUI.SetActive(false);
+
+
     }
 
     public void ShieldlootButton()
     {
         Time.timeScale = 1;
         lootui.SetActive(false);
+        ShieldUI.SetActive(true);
         StartCoroutine("Shield");
        // Destroy(chest);
 

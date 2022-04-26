@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     public float speed = 1f;
     public float attackRate;
     public float attackLength;
+    private UIScript UI;
 
 
     
@@ -30,7 +31,7 @@ public class PlayerScript : MonoBehaviour
     //references
     public BoxCollider2D coll;
     private Rigidbody2D myRB;
-    private Animator anim;
+    public Animator anim;
     public Image HealthBar;
     public Text timer;
     private float time;
@@ -73,8 +74,11 @@ IEnumerator AxeAttack()
 
     public void TakeDamage()
     {
-        health -= damage;
-        bloodEffect.Play();
+       
+            health -= damage;
+            bloodEffect.Play();
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
@@ -85,7 +89,20 @@ IEnumerator AxeAttack()
             coll.gameObject.SetActive(false);
         }
 
+
+        if(coll.CompareTag("HealthUp"))
+        {
+            health += 30;
+            Destroy(coll.gameObject);
+        }
         
+
+        if(coll.CompareTag("Gold"))
+        {
+            UI.gold = UI.gold =+ 2;
+            Destroy(coll.gameObject);
+        }
+    
     }
     private void Start()
     {
@@ -149,8 +166,12 @@ IEnumerator AxeAttack()
     {
         if (coll.collider.CompareTag("Enemy"))
         {
-            TakeDamage();
-            rend.material.color = damageColor;
+          //  if(!UI.shield)
+          //  {
+                TakeDamage();
+                rend.material.color = damageColor;
+           // }
+            
 
         }
     }

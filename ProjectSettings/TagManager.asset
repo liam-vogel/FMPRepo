@@ -9,6 +9,8 @@ TagManager:
   - EXP
   - chest
   - lootui
+  - HealthUp
+  - Gold
   layers:
   - Default
   - TransparentFX
