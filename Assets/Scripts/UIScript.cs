@@ -26,7 +26,8 @@ public class UIScript : MonoBehaviour
     public GameObject Hbut;
     public GameObject Cbut;
     public GameObject lootui;
-    public AudioSource ambient;
+    public AudioSource source;
+    public bool KnifeOn = false;
 
     public bool shield = false;
     public float ShieldDur = 5;
@@ -62,6 +63,8 @@ public class UIScript : MonoBehaviour
     public GameObject attack;
 
     public Scrollbar scrollbar;
+    public AudioClip buttonSound;
+    
 
     void Start()
     {
@@ -77,11 +80,11 @@ public class UIScript : MonoBehaviour
         UpgradesMenu.gameObject.SetActive(false);
         CharactersMenu.gameObject.SetActive(false);
         Player.GetComponent<homingWeapon>();
-        ambient = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
         Hbut.SetActive(true);
         Cbut.SetActive(false);
         coll = PScript.GetComponent<BoxCollider2D>();
-        // chest = 
+       
         scrollbar.value = 0.5f;
      
        
@@ -95,7 +98,7 @@ public class UIScript : MonoBehaviour
    
     public void Volume()
     {
-        ambient.volume = scrollbar.value;
+        PScript.ambientS.volume = scrollbar.value;
     }
     public IEnumerator Shield()
     {
@@ -116,8 +119,16 @@ public class UIScript : MonoBehaviour
         lootui.SetActive(false);
         ShieldUI.SetActive(true);
         StartCoroutine("Shield");
-       // Destroy(chest);
+        // Destroy(chest);
+        source.Play();
 
+    }
+    public void KnifeButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+        KnifeOn = true;
+        source.Play();
     }
 
     public void EXPLootButton()
@@ -125,8 +136,16 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         lootui.SetActive(false);
         PScript.Exp += 100;
-      //  Destroy(chest);
-
+        //  Destroy(chest);
+        source.Play();
+    }
+    public void GoldLootButton()
+    {
+        Time.timeScale = 1;
+        lootui.SetActive(false);
+        gold += 100;
+        //  Destroy(chest);
+        source.Play();
     }
 
     public void HealthLootButton()
@@ -134,8 +153,8 @@ public class UIScript : MonoBehaviour
         Time.timeScale = 1;
         lootui.SetActive(false);
         PScript.health += 100;
-       // Destroy(chest);
-
+        // Destroy(chest);
+        source.Play();
     }
     public void WeaponLootButton()
     {
@@ -144,8 +163,8 @@ public class UIScript : MonoBehaviour
       //  Hwep.SetActive(false);
        // Cwep.SetActive(false);
         attack.SetActive(true);
-       // Destroy(chest);
-        
+        // Destroy(chest);
+        source.Play();
     }
 
 
@@ -173,8 +192,8 @@ public class UIScript : MonoBehaviour
         UpgradesMenu.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(true);
 
-
-   }
+        source.Play();
+    }
 
     public void SMArmorUpgrade()
     {
@@ -196,7 +215,8 @@ public class UIScript : MonoBehaviour
             gold -= 20;
             PScript.speed += 0.05f;
             LevelUpUi.gameObject.SetActive(false);
-            
+            source.Play();
+
         }
     }
 
@@ -207,8 +227,8 @@ public class UIScript : MonoBehaviour
             gold -= 15;
             PScript.health += 30;
             LevelUpUi.gameObject.SetActive(false);
-            
 
+            source.Play();
 
         }
     }
@@ -219,7 +239,7 @@ public class UIScript : MonoBehaviour
             gold -= 30;
             PScript.damage += 2;
             LevelUpUi.gameObject.SetActive(false);
-            
+            source.Play();
         }
     }
 
@@ -233,8 +253,8 @@ public class UIScript : MonoBehaviour
             LevelUpUi.gameObject.SetActive(false);
           
         StartCoroutine(PlayGame());
-        
 
+        source.Play();
 
 
     }
@@ -246,8 +266,8 @@ public class UIScript : MonoBehaviour
 
         PScript.speed += 0.05f;
             LevelUpUi.gameObject.SetActive(false);
-           
-        
+        source.Play();
+
     }
 
     public void HealthUpgrade()
@@ -257,10 +277,10 @@ public class UIScript : MonoBehaviour
 
         PScript.health += 30;
             LevelUpUi.gameObject.SetActive(false);
-            
 
 
-        
+
+        source.Play();
     }
     public void DamageUpgrade()
     {
@@ -270,8 +290,8 @@ public class UIScript : MonoBehaviour
 
         PScript.damage += 2;
             LevelUpUi.gameObject.SetActive(false);
-            
-        
+
+        source.Play();
     }
 
 
@@ -285,16 +305,16 @@ public class UIScript : MonoBehaviour
         SettingsMenu.gameObject.SetActive(false);
         SettingsUi.gameObject.SetActive(false);
         Debug.Log("notActive");
-        
-       
-        
-       
+
+
+        source.Play();
+
     }
 
     public void PauseButton()
     {
 
-
+        source.Play();
         unpauseButton.gameObject.SetActive(true);
         pauseButton.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(true);
@@ -310,17 +330,19 @@ public class UIScript : MonoBehaviour
         CharactersMenu.gameObject.SetActive(false);
         Scroll.gameObject.SetActive(false);
 
-
+        source.Play();
     }
     public void OffCharectersButton()
     {
         CharactersMenu.gameObject.SetActive(false);
         Scroll.gameObject.SetActive(true);
+        source.Play();
     }
     public void OffUpgradesButton()
     {
         UpgradesMenu.gameObject.SetActive(false);
         Scroll.gameObject.SetActive(true);
+        source.Play();
     }
 
     public void CharectersButton()
@@ -328,13 +350,15 @@ public class UIScript : MonoBehaviour
         CharactersMenu.gameObject.SetActive(true);
         UpgradesMenu.gameObject.SetActive(false);
         Scroll.gameObject.SetActive(false);
+        source.Play();
     }
 
     public void LevelUpButton()
     {
         LevelUpUi.gameObject.SetActive(false);
         Time.timeScale = 1;
-        
+        source.Play();
+
     }
 
     // Update is called once per frame
@@ -362,6 +386,7 @@ public class UIScript : MonoBehaviour
 
     public void QuitButton()
     {
+        source.Play();
         SceneManager.LoadScene(0);
     }
     public void CharecterSelect1()
@@ -371,10 +396,12 @@ public class UIScript : MonoBehaviour
         PScript.speed = 1.4f;
         PScript.armor = 1;
         PScript.damage = 3;
+        source.Play();
     }
 
     public void CharecterSelect2()
     {
+        source.Play();
         PScript.rend.sprite = Char2;
         PScript.health = 60;
         PScript.speed = 1.5f;
@@ -389,6 +416,7 @@ public class UIScript : MonoBehaviour
         Cbut.SetActive(false);
        // Hbut.SetActive(true);
         Cwep.SetActive(true);
+        source.Play();
     }
 
     public void OffStaffUpgrade()
@@ -400,6 +428,7 @@ public class UIScript : MonoBehaviour
             // Cbut.SetActive(true);
             Hbut.SetActive(false);
             //Cwep.SetActive(false);
+            source.Play();
         }
 
 

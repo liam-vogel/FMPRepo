@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
     public Image ExpBar;
     public Canvas LevelUpUi;
     public GameObject lootUI;
+    public GameObject KnifePf;
 
     //references
     public BoxCollider2D coll;
@@ -62,6 +63,10 @@ public class PlayerScript : MonoBehaviour
 
     public float dirX;
     public float dirY;
+    public GameObject player;
+    public float Kfirerate = 1f;
+    public float Knextfire = 0f;
+    
    
 
 IEnumerator AxeAttack()
@@ -116,8 +121,8 @@ IEnumerator AxeAttack()
         ambientS = GetComponent<AudioSource>();
         lootUI = GameObject.Find("lootUI");
         lootUI.SetActive(false);
-        
-
+        Knextfire = Time.time + Kfirerate;
+        ambientS.volume = 0.2f;
 
 
     }
@@ -126,6 +131,7 @@ IEnumerator AxeAttack()
 
     private void Update()
     {
+       // knifetim = Time.deltaTime;
         //      if (Input.GetKeyDown(KeyCode.Q));
         //     Instantiate(AxePrefab, axeHolder, axeHolder.transform.rotation);
 
@@ -156,8 +162,10 @@ IEnumerator AxeAttack()
             LevelUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if ( Time.time > Knextfire)
         {
+            Knextfire = Time.time + Kfirerate;
+            Instantiate(KnifePf,player.transform.position, Quaternion.identity);
             
         }
 
@@ -201,12 +209,12 @@ IEnumerator AxeAttack()
         }
         else if (dirY > 0f)
         {
-            state = MovementState.down;
+            state = MovementState.up;
             //  rend.sprite = idle;  
         }
         else if (dirY < 0f)
         {
-            state = MovementState.up;
+            state = MovementState.down;
 
         }
         else
