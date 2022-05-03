@@ -19,7 +19,7 @@ public class ObjectScript : MonoBehaviour
         if (coll.CompareTag("attacks"))
         {
             GameObject Potion = Instantiate(HealthPot, CampfireTrans.transform.position ,Quaternion.identity);
-            Debug.Log("instance");
+        
             Destroy(this.gameObject,0.01f);
         }
     }   // Update is called once per frame

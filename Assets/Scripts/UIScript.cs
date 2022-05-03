@@ -44,13 +44,8 @@ public class UIScript : MonoBehaviour
     
 
     //stats
-    private float health;
-    private float speed;
-    private float damage;
-    private float armor;
-    public int gold = 100;
-    public Text goldAm;
-    public Text goldAmUp;
+    
+
 
     //Referances
     public Collider2D coll;
@@ -65,7 +60,7 @@ public class UIScript : MonoBehaviour
     public Scrollbar scrollbar;
     public AudioClip buttonSound;
     
-
+    
     void Start()
     {
         //MenuUi = GetComponent<Canvas>();
@@ -82,7 +77,7 @@ public class UIScript : MonoBehaviour
         Player.GetComponent<homingWeapon>();
         source = GetComponent<AudioSource>();
         Hbut.SetActive(true);
-        Cbut.SetActive(false);
+        Cbut.SetActive(true);
         coll = PScript.GetComponent<BoxCollider2D>();
        
         scrollbar.value = 0.5f;
@@ -143,7 +138,8 @@ public class UIScript : MonoBehaviour
     {
         Time.timeScale = 1;
         lootui.SetActive(false);
-        gold += 100;
+        PScript.gold += 100;
+        PlayerPrefs.SetInt("Gold", PScript.gold);
         //  Destroy(chest);
         source.Play();
     }
@@ -171,13 +167,13 @@ public class UIScript : MonoBehaviour
     public void AxeWeaponButton()
     {
         
-        if (gold >= 100)
+        if (PScript.gold >= 100)
         {
            
             
-            gold -= 100;
+            PScript.gold -= 100;
             PScript.axeActive = true;
-            
+            PlayerPrefs.SetInt("Gold", PScript.gold);
 
 
 
@@ -197,12 +193,12 @@ public class UIScript : MonoBehaviour
 
     public void SMArmorUpgrade()
     {
-        if(gold >= 20)
+        if(PScript.gold >= 20)
         {
-            gold -= 20;
+            PScript.gold -= 20;
             PScript.armor++;
             LevelUpUi.gameObject.SetActive(false);
-          
+            PlayerPrefs.SetInt("Gold", PScript.gold);
         }
         
         
@@ -210,36 +206,37 @@ public class UIScript : MonoBehaviour
     }
     public void SMSpeedUpgrade()
     {
-        if (gold >= 20)
+        if (PScript.gold >= 20)
         {
-            gold -= 20;
+            PScript.gold -= 20;
             PScript.speed += 0.05f;
             LevelUpUi.gameObject.SetActive(false);
             source.Play();
-
+            PlayerPrefs.SetInt("Gold", PScript.gold);
         }
     }
 
     public void SMHealthUpgrade()
     {
-        if (gold >= 15)
+        if (PScript.gold >= 15)
         {
-            gold -= 15;
+            PScript.gold -= 15;
             PScript.health += 30;
             LevelUpUi.gameObject.SetActive(false);
-
+            PlayerPrefs.SetInt("Gold", PScript.gold);
             source.Play();
 
         }
     }
     public void SMDamageUpgrade()
     {
-        if (gold >= 30)
+        if (PScript.gold >= 30)
         {
-            gold -= 30;
+            PScript.gold -= 30;
             PScript.damage += 2;
             LevelUpUi.gameObject.SetActive(false);
             source.Play();
+            PlayerPrefs.SetInt("Gold", PScript.gold);
         }
     }
 
@@ -304,7 +301,7 @@ public class UIScript : MonoBehaviour
         unpauseButton.gameObject.SetActive(false);
         SettingsMenu.gameObject.SetActive(false);
         SettingsUi.gameObject.SetActive(false);
-        Debug.Log("notActive");
+       
 
 
         source.Play();
@@ -320,7 +317,8 @@ public class UIScript : MonoBehaviour
         SettingsMenu.gameObject.SetActive(true);
         SettingsUi.gameObject.SetActive(true);
         Time.timeScale = 0;
-        Debug.Log("On");
+       
+
     }
 
     public void UpgradesButton()
@@ -377,8 +375,7 @@ public class UIScript : MonoBehaviour
       //  MDStat.text = PScript.damage.ToString();
       //  MSStat.text = PScript.speed.ToString();
       //  MAStat.text = PScript.armor.ToString();
-        goldAm.text = "Gold:" + gold.ToString();
-        goldAmUp.text = "Gold:" + gold.ToString();
+       
 
 
     }
@@ -421,9 +418,9 @@ public class UIScript : MonoBehaviour
 
     public void OffStaffUpgrade()
     {
-      if(gold >= 100)
+      if(PScript.gold >= 100)
         {
-            gold -= 100;
+            PScript.gold -= 100;
             Hwep.SetActive(true);
             // Cbut.SetActive(true);
             Hbut.SetActive(false);

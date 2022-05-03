@@ -51,7 +51,7 @@ public class enemyHealth : MonoBehaviour
             Destroy(gameObject);
             Instantiate(EXPItem, ETrans.position, ETrans.rotation);
 
-            Debug.Log("EnemyDied");
+           
            
 
         }

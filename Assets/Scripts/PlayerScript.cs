@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
-    
+     
+
+
     //Stats
     public float armor = 2;
     public float health = 100;
@@ -16,9 +18,8 @@ public class PlayerScript : MonoBehaviour
     public float attackLength;
     private UIScript UI;
 
-
+    public GameObject goldobj;
     
-
 
     //EXPScript Exps;
     homingWeapon HWep;
@@ -28,7 +29,8 @@ public class PlayerScript : MonoBehaviour
     public Canvas LevelUpUi;
     public GameObject lootUI;
     public GameObject KnifePf;
-
+    public float maxHealth;
+    
     //references
     public BoxCollider2D coll;
     private Rigidbody2D myRB;
@@ -66,10 +68,13 @@ public class PlayerScript : MonoBehaviour
     public GameObject player;
     public float Kfirerate = 1f;
     public float Knextfire = 0f;
-    
-   
 
-IEnumerator AxeAttack()
+    public int gold = 100;
+    public Text goldAm;
+    public Text goldAmUp;
+
+
+    IEnumerator AxeAttack()
 {
     //Instantiate(AxePrefab, LaunchOffset.transform, axeHolder.transform.rotation);
     yield return new WaitForSeconds(3);
@@ -91,7 +96,7 @@ IEnumerator AxeAttack()
         if(coll.CompareTag("EXP"))
         {
             Exp++;
-            coll.gameObject.SetActive(false);
+            Destroy(coll.gameObject);
         }
 
 
@@ -100,14 +105,17 @@ IEnumerator AxeAttack()
             health += 30;
             Destroy(coll.gameObject);
         }
-        
 
-        if(coll.CompareTag("Gold"))
+        if (coll.CompareTag("Gold"))
         {
-            UI.gold = UI.gold =+ 2;
+            gold = gold += 2;
+            PlayerPrefs.SetInt("Gold", gold);
             Destroy(coll.gameObject);
+            Debug.Log(gold);
+            Debug.Log("hi");
         }
-    
+
+
     }
     private void Start()
     {
@@ -123,15 +131,19 @@ IEnumerator AxeAttack()
         lootUI.SetActive(false);
         Knextfire = Time.time + Kfirerate;
         ambientS.volume = 0.2f;
-
-
+        gold = 100;
+        Debug.Log(gold);
     }
 
-    
+    public void IncreaseHealth(int level)
+    {
+        maxHealth += (health * 0.01f) * ((100 - level) * 0.01f);
+        health = maxHealth;
+    }
 
     private void Update()
     {
-       // knifetim = Time.deltaTime;
+        // knifetim = Time.deltaTime;
         //      if (Input.GetKeyDown(KeyCode.Q));
         //     Instantiate(AxePrefab, axeHolder, axeHolder.transform.rotation);
 
@@ -139,6 +151,9 @@ IEnumerator AxeAttack()
           {
               AxeAttack();
           }*/
+
+        goldAm.text = "Gold:" + gold.ToString();
+        goldAmUp.text = "Gold:" + gold.ToString();
 
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxisRaw("Vertical");
@@ -198,13 +213,13 @@ IEnumerator AxeAttack()
             state = MovementState.right;
 
             // rend.sprite = right;
-            //   Debug.Log("right");
+         
 
         }
         else if (dirX < 0f)
         {
             state = MovementState.left;
-            //   Debug.Log("left");
+         
             //  rend.sprite = left;
         }
         else if (dirY > 0f)

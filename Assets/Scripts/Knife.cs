@@ -13,6 +13,9 @@ public class Knife : MonoBehaviour
     // Start is called before the first frame update
     public float KnifeDur = 5;
     public bool up;
+    public PlayerScript PS;
+    public Transform Player;
+    public float distance;
     void Start()
     {
         StartCoroutine(KnifeTimer());
@@ -20,7 +23,9 @@ public class Knife : MonoBehaviour
         trans = GetComponent<Transform>();
         // PS = GetComponent<PlayerScript>();
         //playerT = GetComponent<GameObject>();
-
+        PS = GameObject.Find("Player").GetComponent<PlayerScript>();
+        Player = GameObject.Find("Player").GetComponent<Transform>();
+        
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -34,6 +39,7 @@ public class Knife : MonoBehaviour
         else if (Input.GetKey(KeyCode.A))
         {
             // trans.position = playerT.transform.position;
+           
             rb.AddForce(rb.velocity = new Vector2(-10f, trans.forward.x));
             return;
         }
@@ -56,7 +62,14 @@ public class Knife : MonoBehaviour
 
          }
 
-        
+        if (PS.dirX > 0)
+        {
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
+        else if (PS.dirX < 0)
+        {
+            transform.localScale = new Vector3(-0.5f, 0.5f, 1f);
+        }
     }
 
      public IEnumerator KnifeTimer()
@@ -78,7 +91,18 @@ public class Knife : MonoBehaviour
 
         Destroy(gameObject,5f);
 
+        Vector3 distToPlayer = trans.position - Player.position;
+        Debug.Log(distToPlayer.magnitude);
 
+        
+        if (PS.dirX > 0 && distToPlayer.magnitude < 0.5f)
+        {
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        }
+        else if (PS.dirX < 0 && distToPlayer.magnitude < 0.5f)
+        {
+            transform.localScale = new Vector3(-0.5f, 0.5f, 1f);
+        }
 
 
     }
