@@ -18,7 +18,7 @@ public class enemyHealth : MonoBehaviour
     {
         rend = GetComponentInChildren<SpriteRenderer>();
         ETrans = GetComponent<Transform>();
-       
+        //enemy.tag = "Enemy";
 
     }
     IEnumerator DamageFlash()

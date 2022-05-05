@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerScript : MonoBehaviour
 {
-     
+
 
 
     //Stats
@@ -17,9 +18,10 @@ public class PlayerScript : MonoBehaviour
     public float attackRate;
     public float attackLength;
     private UIScript UI;
+    public GameObject deathUI;
 
     public GameObject goldobj;
-    
+
 
     //EXPScript Exps;
     homingWeapon HWep;
@@ -30,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject lootUI;
     public GameObject KnifePf;
     public float maxHealth;
-    
+
     //references
     public BoxCollider2D coll;
     private Rigidbody2D myRB;
@@ -46,19 +48,19 @@ public class PlayerScript : MonoBehaviour
     private Color normalColor = Color.white;
     public GameObject lootui;
     public AudioSource ambientS;
-   // public AudioClip ambientSound;
+    // public AudioClip ambientSound;
     public bool axeActive = false;
     // public GameObject lootUI;
-  //  public Sprite left;
- //   public Sprite right;
-  //  public Sprite idle;
+    //  public Sprite left;
+    //   public Sprite right;
+    //  public Sprite idle;
     //  public Transform LaunchOffset;
     public ParticleSystem bloodEffect;
 
     //public axe LaunchOffset;
 
     public MovementState state;
-    public enum MovementState { idle, left, right,up,down }
+    public enum MovementState { idle, left, right, up, down }
 
     public GameObject AxePrefab;
     public GameObject axeHolder;
@@ -73,34 +75,43 @@ public class PlayerScript : MonoBehaviour
     public Text goldAm;
     public Text goldAmUp;
 
+    public GameObject WS1;
+    public GameObject WS2;
+
+    public PlayerScript PS;
+    public GameObject[] enemys;
+    public GameObject[] exps;
+
 
     IEnumerator AxeAttack()
-{
-    //Instantiate(AxePrefab, LaunchOffset.transform, axeHolder.transform.rotation);
-    yield return new WaitForSeconds(3);
-}
+    {
+        //Instantiate(AxePrefab, LaunchOffset.transform, axeHolder.transform.rotation);
+        yield return new WaitForSeconds(3);
+    }
     private enum FSM { Idle, walking };
 
 
     public void TakeDamage()
     {
-       
-            health -= damage;
-            bloodEffect.Play();
-        
-        
+
+        health -= damage;
+        bloodEffect.Play();
+
+
     }
+ 
+
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.CompareTag("EXP"))
+        if (coll.CompareTag("EXP"))
         {
             Exp++;
             Destroy(coll.gameObject);
         }
 
 
-        if(coll.CompareTag("HealthUp"))
+        if (coll.CompareTag("HealthUp"))
         {
             health += 30;
             Destroy(coll.gameObject);
@@ -117,6 +128,17 @@ public class PlayerScript : MonoBehaviour
 
 
     }
+    public IEnumerator WaveSswitch()
+    {
+        WS2.SetActive(false);
+        WS1.SetActive(true);
+        yield return new WaitForSeconds(240f);
+        WS2.SetActive(true);
+        WS1.SetActive(false);
+
+    }
+        
+
     private void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
@@ -133,6 +155,9 @@ public class PlayerScript : MonoBehaviour
         ambientS.volume = 0.2f;
         gold = 100;
         Debug.Log(gold);
+        StartCoroutine(("WaveSswitch"));
+        deathUI = GameObject.Find("DeathUI");
+        deathUI.SetActive(false);
     }
 
     public void IncreaseHealth(int level)
@@ -165,7 +190,26 @@ public class PlayerScript : MonoBehaviour
 
         if (health <= 0)
         {
-            SceneManager.LoadScene(0);
+            // SceneManager.LoadScene(0);
+            deathUI.SetActive(true);
+            Time.timeScale = 0;
+
+            enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            exps = GameObject.FindGameObjectsWithTag("EXP");
+
+            foreach (GameObject enemy in enemys)
+            {
+                Destroy(enemy);
+
+            }
+
+            foreach (GameObject exp in exps)
+            {
+                Destroy(exp);
+
+            }
+
+
         }
 
         HealthBar.fillAmount = health / 100;
@@ -185,6 +229,19 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
+
+    public void DeathUI()
+    {
+
+        deathUI.SetActive(false);
+        Time.timeScale = 1;
+        health = 100;
+        WS1.SetActive(true);
+        WS2.SetActive(false);
+        armor = 1;
+        speed = 1.5f;
+    }
+
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.collider.CompareTag("Enemy"))

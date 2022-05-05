@@ -20,6 +20,8 @@ public class UIScript : MonoBehaviour
     public GameObject Player;
     public Sprite Char1;
     public Sprite Char2;
+    public Sprite Char3;
+    public Sprite Char4;
     public Canvas LevelUpUi;
     public GameObject ShieldUI;
   
@@ -32,6 +34,8 @@ public class UIScript : MonoBehaviour
     public bool shield = false;
     public float ShieldDur = 5;
 
+ 
+
     //weapon stats
     public Text HStat;
     public Text SStat;
@@ -41,11 +45,11 @@ public class UIScript : MonoBehaviour
     public Text MSStat;
     public Text MAStat;
     public Text MDStat;
-    
+
 
     //stats
-    
 
+   
 
     //Referances
     public Collider2D coll;
@@ -59,9 +63,11 @@ public class UIScript : MonoBehaviour
 
     public Scrollbar scrollbar;
     public AudioClip buttonSound;
+
+    public GameObject deathUI;
     
-    
-    void Start()
+
+void Start()
     {
         //MenuUi = GetComponent<Canvas>();
        // PlayerUi = GetComponent<Canvas>();
@@ -79,18 +85,21 @@ public class UIScript : MonoBehaviour
         Hbut.SetActive(true);
         Cbut.SetActive(true);
         coll = PScript.GetComponent<BoxCollider2D>();
-       
+        deathUI = GameObject.Find("DeathUI");
+      //  deathUI.SetActive(false);
         scrollbar.value = 0.5f;
-     
-       
+
+
        // PScript.health = health;
        // PScript.speed = speed;
        // PScript.speed = damage;
        // PScript.speed = armor;
 
-
+  
     }
-   
+
+
+    
     public void Volume()
     {
         PScript.ambientS.volume = scrollbar.value;
@@ -107,6 +116,8 @@ public class UIScript : MonoBehaviour
 
 
     }
+
+   
 
     public void ShieldlootButton()
     {
@@ -404,16 +415,39 @@ public class UIScript : MonoBehaviour
         PScript.speed = 1.5f;
         PScript.armor = 0;
         PScript.damage = 3;
+        
+   }
+
+    public void CharecterSelect3()
+    {
+        source.Play();
+        PScript.rend.sprite = Char3;
+        PScript.health = 100;
+        PScript.speed = 1.6f;
+        PScript.armor = 1;
+        PScript.damage = 3;
     }
 
+     public void CharecterSelect4()
+    {
+        source.Play();
+        PScript.rend.sprite = Char4;
+        PScript.health = 150;
+        PScript.speed = 1.5f;
+        PScript.armor = 1;
+        PScript.damage = 3;
+    }
     public void StaffUpgrade()
     {
-        
-      //  Hwep.SetActive(false);
-        Cbut.SetActive(false);
-       // Hbut.SetActive(true);
-        Cwep.SetActive(true);
-        source.Play();
+        if (PScript.gold >= 100)
+        {
+            PScript.gold -= 100;
+            //  Hwep.SetActive(false);
+            Cbut.SetActive(false);
+            // Hbut.SetActive(true);
+            Cwep.SetActive(true);
+            source.Play();
+        }
     }
 
     public void OffStaffUpgrade()

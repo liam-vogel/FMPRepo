@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+  player: {fileID: 0}
 --- !u!50 &8159290897808705876
 Rigidbody2D:
   serializedVersion: 4

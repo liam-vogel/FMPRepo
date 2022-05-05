@@ -17,10 +17,13 @@ namespace Pathfinding {
 	public class AIDestinationSetter : VersionedMonoBehaviour {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
+		[SerializeField] GameObject player;
 		IAstarAI ai;
 
 		void OnEnable () {
 			ai = GetComponent<IAstarAI>();
+			player = GameObject.Find("Player");
+			target = player.GetComponent<Transform>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every
 			// frame as the destination is used for debugging and may be used for other things by other
@@ -38,5 +41,5 @@ namespace Pathfinding {
 
 			if (target != null && ai != null) ai.destination = target.position; //"code for offsetting target pos to infront of player"  new Vector3(target.position.x + 1, target.position.y, target.position.z);
 		}
-	}
+    }
 }
