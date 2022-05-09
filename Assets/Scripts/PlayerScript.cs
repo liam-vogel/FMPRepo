@@ -65,6 +65,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject AxePrefab;
     public GameObject axeHolder;
 
+    public GameObject PostP;
+
     public float dirX;
     public float dirY;
     public GameObject player;
@@ -119,7 +121,7 @@ public class PlayerScript : MonoBehaviour
 
         if (coll.CompareTag("Gold"))
         {
-            gold = gold += 2;
+            gold = gold += 20;
             PlayerPrefs.SetInt("Gold", gold);
             Destroy(coll.gameObject);
             Debug.Log(gold);
@@ -188,6 +190,15 @@ public class PlayerScript : MonoBehaviour
 
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * 3f * speed;
 
+        if (health <= 35)
+        {
+            PostP.SetActive(true);
+        }
+        else if (health >= 35)
+        {
+            PostP.SetActive(false);
+        }
+
         if (health <= 0)
         {
             // SceneManager.LoadScene(0);
@@ -240,6 +251,7 @@ public class PlayerScript : MonoBehaviour
         WS2.SetActive(false);
         armor = 1;
         speed = 1.5f;
+        player.transform.position = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D coll)

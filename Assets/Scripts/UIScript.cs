@@ -447,7 +447,28 @@ void Start()
             // Hbut.SetActive(true);
             Cwep.SetActive(true);
             source.Play();
+
+            //deathUI.SetActive(false);
+            lootui.SetActive(false);
+
+            Time.timeScale = 1;
         }
+    }
+
+    public void StaffLoot()
+    {
+       
+            //  Hwep.SetActive(false);
+            Cbut.SetActive(false);
+            // Hbut.SetActive(true);
+            Cwep.SetActive(true);
+            source.Play();
+
+            //deathUI.SetActive(false);
+            lootui.SetActive(false);
+
+            Time.timeScale = 1;
+        
     }
 
     public void OffStaffUpgrade()
