@@ -151,7 +151,7 @@ public class PlayerScript : MonoBehaviour
         damage -= armor;
         StartCoroutine("Stopwatch");
         ambientS = GetComponent<AudioSource>();
-        lootUI = GameObject.Find("lootUI");
+        lootUI = GameObject.Find("lootui");
         lootUI.SetActive(false);
         Knextfire = Time.time + Kfirerate;
         ambientS.volume = 0.2f;
@@ -246,11 +246,11 @@ public class PlayerScript : MonoBehaviour
 
         deathUI.SetActive(false);
         Time.timeScale = 1;
-        health = 100;
+       // health = 100;
         WS1.SetActive(true);
         WS2.SetActive(false);
-        armor = 1;
-        speed = 1.5f;
+     //   armor = 1;
+      //  speed = 1.5f;
         player.transform.position = new Vector3(0, 0, 0);
     }
 

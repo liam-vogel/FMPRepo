@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6b70f0068d28948948ec03b210e96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 40
   damage: 20
   enemy: {fileID: 8159290897808705886}
   EXPItem: {fileID: 4879702436877939459, guid: a76b3382dbd176447b15064970bd312c, type: 3}

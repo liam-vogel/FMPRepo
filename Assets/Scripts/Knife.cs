@@ -89,7 +89,7 @@ public class Knife : MonoBehaviour
 
 
 
-        Destroy(gameObject,5f);
+        Destroy(gameObject,2f);
 
         Vector3 distToPlayer = trans.position - Player.position;
         Debug.Log(distToPlayer.magnitude);
