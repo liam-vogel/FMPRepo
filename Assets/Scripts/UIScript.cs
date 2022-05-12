@@ -94,7 +94,7 @@ public class UIScript : MonoBehaviour
         Cbut.SetActive(true);
         coll = PScript.GetComponent<BoxCollider2D>();
         deathUI = GameObject.Find("DeathUI");
-        //  deathUI.SetActive(false);
+       // deathUI.SetActive(false);
         scrollbar.value = 0.5f;
         Tut.SetActive(true);
         StartCoroutine(StartTut());
@@ -478,7 +478,7 @@ public class UIScript : MonoBehaviour
 
         //  Hwep.SetActive(false);
        // Cbut.SetActive(false);
-        // Hbut.SetActive(true);
+         Hbut.SetActive(false);
         Cwep.SetActive(true);
         source.Play();
 

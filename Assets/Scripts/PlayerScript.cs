@@ -246,7 +246,7 @@ public class PlayerScript : MonoBehaviour
 
         deathUI.SetActive(false);
         Time.timeScale = 1;
-       // health = 100;
+        health += 10;
         WS1.SetActive(true);
         WS2.SetActive(false);
      //   armor = 1;
